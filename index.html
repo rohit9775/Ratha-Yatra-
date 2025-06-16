@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>শুভ রথযাত্রা - আপনার নামে শুভেচ্ছা জানান</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;700&display=swap');
+        :root {
+            --primary-color: #E65100; --secondary-color: #D84315;
+            --text-color: #4E342E; --background-light: #FFF8E1;
+        }
+        html, body {
+            height: 100%; margin: 0;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+        body {
+            display: flex; flex-direction: column; 
+            background: linear-gradient(135deg, #FFD54F, #FFB300, #F57C00);
+            padding-top: 50px; /* উপরের বিজ্ঞাপনের জন্য জায়গা */
+            padding-bottom: 50px; /* নিচের বিজ্ঞাপনের জন্য জায়গা */
+            box-sizing: border-box;
+        }
+        .ad-space {
+            width: 100%; height: 50px; 
+            flex-shrink: 0;
+            display: flex; justify-content: center; align-items: center;
+            position: fixed;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.1);
+            z-index: 9998;
+        }
+        .ad-top {
+            top: 0;
+        }
+        .ad-space.ad-bottom {
+            bottom: 0;
+            height: 50px !important;
+            z-index: 9999;
+            overflow: hidden !important;
+            background-color: #f1f1f1;
+        }
+        .main-container {
+            flex-grow: 1; width: 100%; display: flex; justify-content: center;
+            align-items: center; padding: 15px; box-sizing: border-box; min-height: 0;
+            overflow-y: auto;
+        }
+        .greeting-card {
+            width: 100%; max-width: 400px; 
+            background: var(--background-light);
+            border-radius: 25px; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            display: flex; flex-direction: column; justify-content: center;
+            align-items: center; padding: 20px; box-sizing: border-box;
+            position: relative;
+            margin: auto;
+        }
+        
+        h1 { font-size: 2.5rem; text-align: center; font-weight: 700; margin: 0 0 5px 0; background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        #wish-message { color: var(--secondary-color); font-size: 1.1rem; font-weight: 700; margin: 10px 0; padding: 8px 12px; background: #fff; border-radius: 10px; border-left: 5px solid var(--primary-color); text-align: center; }
+        .ratha-image { max-width: 100%; max-height: 28vh; height: auto; object-fit: contain; margin: 5px 0; }
+        p { color: var(--text-color); font-size: 1rem; font-weight: 500; line-height: 1.5; margin: 5px 0; text-align: center; }
+        .input-area { margin: 10px 0 0 0; width: 100%; text-align: center; }
+        .input-area p { font-weight: 700; font-size: 1.1rem; margin-bottom: 5px; }
+        #nameInput { width: 85%; padding: 12px; border: 2px solid #E0E0E0; border-radius: 30px; font-size: 1rem; text-align: center; font-family: 'Hind Siliguri', sans-serif; font-weight: 500; }
+        
+        #music-control-btn { background: #fff; color: var(--primary-color); border: 2px solid var(--primary-color); border-radius: 30px; padding: 8px 18px; font-size: 0.9rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; margin-top: 10px; transition: all 0.3s ease; }
+        #music-control-btn:hover { background-color: #FFF3E0; }
+        .action-button { padding: 12px 25px; font-size: 1.1rem; font-weight: 700; margin-top: 10px; cursor: pointer; transition: all 0.3s ease; text-decoration: none; color: white; display: inline-flex; align-items: center; justify-content: center; border: none; border-radius: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)); }
+        .share-button { display: inline-flex; align-items: center; justify-content: center; width: 50px; height: 50px; margin: 0 8px; border-radius: 50%; font-size: 24px; color: white; text-decoration: none; cursor: pointer; border: none; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: all 0.3s ease; }
+        .action-button:hover, .share-button:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        #share-section { display: none; margin-top: 15px; text-align: center; }
+        #share-section > p { font-weight: 700; margin-bottom: 10px; }
+        #whatsapp-share { background-color: #25D366; }
+        #facebook-share { background-color: #1877F2; }
+    </style>
+</head>
+<body>
+    <audio id="background-music" src="noob.mp3" loop></audio>
+
+    <div class="ad-space ad-top"><span>Top Ad Space (Placeholder)</span></div>
+    
+    <div class="main-container">
+        <div class="greeting-card">
+            <h1>শুভ রথযাত্রা</h1>
+            <div id="wish-message"></div>
+            <img src="noob.gif" alt="রথযাত্রার GIF" class="ratha-image">
+            <button id="music-control-btn"><i class="fas fa-music"></i> <span>সংগীত চালু করুন</span></button>
+            <p>মহাপ্রভুর রথযাত্রার এই পুণ্যতিথিতে আপনার জীবন আনন্দ ও সমৃদ্ধিতে ভরে উঠুক।</p>
+            <div class="input-area">
+                <p>আপনার নাম লিখুন</p>
+                <input type="text" id="nameInput" placeholder="এখানে নাম লিখুন...">
+                <br>
+                <button class="action-button" onclick="generateLink()">প্রভুর আশীর্বাদ পেতে শেয়ার করুন</button>
+            </div>
+            <div id="share-section">
+                <p>শেয়ার করুন:</p>
+                <a href="#" id="whatsapp-share" class="share-button" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" id="facebook-share" class="share-button" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="ad-space ad-bottom">
+        <!-- Adstera Ad Script (Bottom) -->
+        <script type="text/javascript">
+            atOptions = {
+                'key' : '60937b60fbdbfce8c349f6f404ec52b0',
+                'format' : 'iframe',
+                'height' : 50,
+                'width' : 320,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/60937b60fbdbfce8c349f6f404ec52b0/invoke.js"></script>
+    </div>
+
+    <script>
+        const music = document.getElementById('background-music');
+        const musicControlButton = document.getElementById('music-control-btn');
+        const musicIcon = musicControlButton.querySelector('i');
+        const musicText = musicControlButton.querySelector('span');
+
+        function toggleMusicPlayback() {
+            if (music.paused) {
+                music.play().catch(error => console.log("Music play was prevented by browser."));
+                musicIcon.classList.remove('fa-music');
+                musicIcon.classList.add('fa-pause');
+                musicText.textContent = 'সংগীত বন্ধ করুন';
+            } else {
+                music.pause();
+                musicIcon.classList.remove('fa-pause');
+                musicIcon.classList.add('fa-play');
+                musicText.textContent = 'সংগীত চালু করুন';
+            }
+        }
+        musicControlButton.addEventListener('click', toggleMusicPlayback);
+        
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const senderName = urlParams.get('name');
+            if (senderName) {
+                const decodedName = decodeURIComponent(senderName.replace(/\+/g, ' '));
+                document.getElementById('wish-message').innerHTML = `<strong>${decodedName}</strong> আপনাকে শুভেচ্ছা জানিয়েছেন!`;
+                document.querySelector('.input-area').style.display = 'none';
+            }
+        };
+        function generateLink() {
+            const nameInput = document.getElementById('nameInput');
+            const name = nameInput.value.trim();
+            if (name === "") { alert("দয়া করে আপনার নাম লিখুন!"); return; }
+            const baseUrl = window.location.href.split('?')[0];
+            const encodedName = encodeURIComponent(name);
+            const wishUrl = `${baseUrl}?name=${encodedName}`;
+            const shareText = `*${name}* আপনাকে রথযাত্রার শুভেচ্ছা পাঠিয়েছেন। 🙏%0A%0Aআপনার জন্যও একটি শুভেচ্ছা কার্ড বানাতে নিচের লিঙ্কে ক্লিক করুন 👇%0A%0A${wishUrl}`;
+            document.getElementById('whatsapp-share').href = `https://api.whatsapp.com/send?text=${shareText}`;
+            document.getElementById('facebook-share').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(wishUrl)}`;
+            document.getElementById('share-section').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
