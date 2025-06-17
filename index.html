@@ -14,36 +14,33 @@
         html, body {
             height: 100%; margin: 0;
             font-family: 'Hind Siliguri', sans-serif;
-            overflow: hidden; /* পুরো পেজের স্ক্রলিং বন্ধ করা হলো */
+            overflow: hidden;
         }
         body {
             background: linear-gradient(135deg, #FFD54F, #FFB300, #F57C00);
-            /* পরিবর্তন: শুধুমাত্র নিচের বিজ্ঞাপনের জন্য জায়গা রাখা হলো */
             padding-bottom: 50px;
             box-sizing: border-box;
         }
         .ad-space.ad-bottom {
             width: 100%;
             height: 50px !important;
-            position: fixed; /* বিজ্ঞাপনকে পিন করা হলো */
+            position: fixed;
             left: 0;
             bottom: 0;
             z-index: 999;
             display: flex; justify-content: center; align-items: center;
             background-color: rgba(255, 255, 255, 0.8);
-            overflow: hidden !important; /* বিজ্ঞাপনকে কন্টেইনারের বাইরে যেতে বাধা দেওয়া */
+            overflow: hidden !important;
         }
-        
-        /* লেআউট: মূল কন্টেন্ট এলাকা */
         .main-container {
-            height: 100%; /* বডির বাকি পুরো জায়গা নেওয়া হলো */
+            height: 100%;
             width: 100%;
-            overflow-y: auto; /* যদি কন্টেন্ট বড় হয় তবে এই অংশ স্ক্রল হবে */
+            overflow-y: auto;
             padding: 20px 15px;
             box-sizing: border-box;
-            display: flex; /* কার্ডকে সেন্টারে রাখার জন্য */
+            display: flex;
             justify-content: center;
-            align-items: flex-start; /* কার্ডকে উপরে অ্যালাইন করা */
+            align-items: flex-start;
         }
         .greeting-card {
             width: 100%;
@@ -59,7 +56,7 @@
         }
         
         h1 { font-size: 2.5rem; text-align: center; font-weight: 700; margin: 0 0 5px 0; background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        #wish-message { color: var(--secondary-color); font-size: 1.1rem; font-weight: 700; margin: 10px 0; padding: 8px 12px; background: #fff; border-radius: 10px; border-left: 5px solid var(--primary-color); text-align: center; word-break: break-word; }
+        #wish-message { display: none; /* ডিফল্টভাবে লুকানো থাকবে */ color: var(--secondary-color); font-size: 1.1rem; font-weight: 700; margin: 10px 0; padding: 8px 12px; background: #fff; border-radius: 10px; border-left: 5px solid var(--primary-color); text-align: center; word-break: break-word; }
         .ratha-image { max-width: 100%; max-height: 25vh; height: auto; object-fit: contain; margin: 10px 0; }
         p { color: var(--text-color); font-size: 1rem; font-weight: 500; line-height: 1.5; margin: 5px 0; text-align: center; }
         .input-area { margin-top: 15px; width: 100%; text-align: center; }
@@ -67,7 +64,6 @@
         #nameInput { width: 90%; padding: 12px; border: 2px solid #E0E0E0; border-radius: 30px; font-size: 1rem; text-align: center; font-family: 'Hind Siliguri', sans-serif; font-weight: 500; }
         
         #music-control-btn { background: #fff; color: var(--primary-color); border: 2px solid var(--primary-color); border-radius: 30px; padding: 8px 18px; font-size: 0.9rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; margin-top: 15px; transition: all 0.3s ease; }
-        #music-control-btn:hover { background-color: #FFF3E0; }
         .action-button { padding: 12px 25px; font-size: 1.1rem; font-weight: 700; margin-top: 15px; cursor: pointer; text-decoration: none; color: white; display: inline-flex; align-items: center; justify-content: center; border: none; border-radius: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)); }
         .share-button { display: inline-flex; align-items: center; justify-content: center; width: 50px; height: 50px; margin: 0 8px; border-radius: 50%; font-size: 24px; color: white; text-decoration: none; cursor: pointer; border: none; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
         #share-section { display: none; margin-top: 20px; text-align: center; }
@@ -87,13 +83,13 @@
             <button id="music-control-btn"><i class="fas fa-music"></i> <span>সংগীত চালু করুন</span></button>
             <p>মহাপ্রভুর রথযাত্রার এই পুণ্যতিথিতে আপনার জীবন আনন্দ ও সমৃদ্ধিতে ভরে উঠুক।</p>
             <div class="input-area">
-                <p>আপনার নাম লিখুন</p>
+                <p id="input-title">আপনার নাম লিখুন</p>
                 <input type="text" id="nameInput" placeholder="এখানে নাম লিখুন...">
                 <br>
                 <button class="action-button" onclick="generateLink()">প্রভুর আশীর্বাদ পেতে শেয়ার করুন</button>
             </div>
             <div id="share-section">
-                <p>শেয়ার করুন:</p>
+                <p>বন্ধুদের সাথে শেয়ার করুন:</p>
                 <a href="#" id="whatsapp-share" class="share-button" target="_blank"><i class="fab fa-whatsapp"></i></a>
                 <a href="#" id="facebook-share" class="share-button" target="_blank"><i class="fab fa-facebook-f"></i></a>
             </div>
@@ -117,38 +113,43 @@
     <script>
         const music = document.getElementById('background-music');
         const musicControlButton = document.getElementById('music-control-btn');
-        const musicIcon = musicControlButton.querySelector('i');
-        const musicText = musicControlButton.querySelector('span');
 
         function toggleMusicPlayback() {
             if (music.paused) {
-                music.play().catch(error => console.log("Music play was prevented by browser."));
-                musicIcon.classList.remove('fa-music');
-                musicIcon.classList.add('fa-pause');
-                musicText.textContent = 'সংগীত বন্ধ করুন';
+                music.play().catch(error => console.log("Music play was prevented."));
+                musicControlButton.querySelector('i').classList.replace('fa-music', 'fa-pause');
+                musicControlButton.querySelector('span').textContent = 'সংগীত বন্ধ করুন';
             } else {
                 music.pause();
-                musicIcon.classList.remove('fa-pause');
-                musicIcon.classList.add('fa-play');
-                musicText.textContent = 'সংগীত চালু করুন';
+                musicControlButton.querySelector('i').classList.replace('fa-pause', 'fa-play');
+                musicControlButton.querySelector('span').textContent = 'সংগীত চালু করুন';
             }
         }
         musicControlButton.addEventListener('click', toggleMusicPlayback);
         
+        // *** জাভাস্ক্রিপ্টের সম্পূর্ণ সঠিক কোড ***
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const senderName = urlParams.get('name');
+            const wishMessageDiv = document.getElementById('wish-message');
+            const inputTitle = document.getElementById('input-title');
+
             if (senderName) {
+                // যদি URL-এ নাম থাকে (অর্থাৎ এটি একটি শেয়ার করা লিঙ্ক)
                 const decodedName = decodeURIComponent(senderName.replace(/\+/g, ' '));
-                document.getElementById('wish-message').innerHTML = `<strong>${decodedName}</strong> আপনাকে শুভেচ্ছা জানিয়েছেন!`;
-                const inputArea = document.querySelector('.input-area');
-                if (inputArea) {
-                    inputArea.remove();
-                }
+                wishMessageDiv.innerHTML = `<strong>${decodedName}</strong> আপনাকে শুভেচ্ছা জানিয়েছেন!`;
+                wishMessageDiv.style.display = 'block'; // শুভেচ্ছা বার্তাটি দেখানো হবে
+                
+                // ইনপুট অংশের শিরোনাম পরিবর্তন করা হবে
+                inputTitle.textContent = "তুমিও নিজের নামে শুভেচ্ছা পাঠাও";
+
             } else {
-                document.getElementById('wish-message').style.display = 'none';
+                // যদি URL-এ নাম না থাকে (অর্থাৎ সরাসরি ওয়েবসাইটে আসা হয়েছে)
+                wishMessageDiv.style.display = 'none'; // শুভেচ্ছা বার্তা লুকানো থাকবে
             }
+            // কোনো অবস্থাতেই নাম লেখার অংশটি মুছে ফেলা হবে না।
         };
+
         function generateLink() {
             const nameInput = document.getElementById('nameInput');
             const name = nameInput.value.trim();
